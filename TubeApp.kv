@@ -1,0 +1,152 @@
+#Kv file runs creating a large majority of the graphical objects on the interface of the application
+<TubeScreen>:
+    Screen:
+        name: 'main'
+        canvas:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'24561-travel_big_ben_at_sunset_wallpaper.jpg'
+        GridLayout:
+
+            cols:2
+            col_force_default: True
+            col_default_width: 400
+            row_force_default: True
+            row_default_height:460
+            spacing: 0, 0
+            pos_hint:{'x':.25, 'y':-.30}
+            GridLayout:
+
+                cols:1
+                spacing: 0, 60
+                size_hint: None, None
+                size: 400, 465
+                Spinner:
+                    id: spinner1
+                    text:'Please, Where From?'
+                    size:250, 50
+                    size_hint:None, None
+                    values:root.spinner_filler()
+                Spinner:
+                    id: spinner2
+                    text:'Please, Where To?'
+                    size:250, 50
+                    size_hint:None, None
+                    values:root.spinner_filler()
+                Button:
+                    id: btn1
+                    text:'Go !!!'
+                    size:250, 50
+                    size_hint:None, None
+                    on_release: root.starter()
+
+            GridLayout:
+                cols:1
+                canvas.before:
+                    Color:
+                        rgb: 1, 1, 1, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                size_hint: None, None
+                size: 400, 645
+
+                Label:
+                    id: start
+                    text_size:self.size
+                    valign: 'bottom'
+                    halign: 'right'
+                    background_color: 1, 1, 1, 1
+                    size_hint: None, None
+                    size: 400, 30
+                    font_size: 27
+                    bold: True
+                    color: 1, 0, 0
+                ScrollView:
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 1, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    size_hint: None, None
+                    size: 400, 400
+                    bar_width:20
+                    GridLayout:
+                        id:s_layout
+                        size_hint_y: None
+                        height:0
+                        cols:1
+                        col_force_default: True
+                        col_default_width:400
+                Label:
+                    id: end
+                    text_size:self.size
+                    valign: 'bottom'
+                    halign: 'right'
+                    size_hint: None, None
+                    size: 400, 27
+                    font_size: 27
+                    bold: True
+                    color: 1, 0, 0
+                Label:
+                    id:lbchanges
+                    text_size:self.size
+                    valign: 'bottom'
+                    halign: 'left'
+                    size_hint: None, None
+                    size: 400, 27
+                    font_size: 27
+                    bold: True
+                    color: 1, 0, 0
+                ScrollView:
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 1, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    size_hint: None, None
+                    size: 400, 180
+                    bar_width:20
+                    GridLayout:
+                        id:change
+                        size_hint_y: None
+                        height:0
+                        cols:1
+                        col_force_default: True
+                        col_default_width:400
+        Button:
+            #disable:if self.ids.spinner1.text == 'Please Where From' or self.ids.spinner2.text == 'Please Where To': True
+            text:'See Map'
+            size:250, 50
+            size_hint:None, None
+            on_release: root.current = 'map'
+    Screen:
+        name:'map'
+        canvas:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'24561-travel_big_ben_at_sunset_wallpaper.jpg'
+
+        Scatter:
+            pos: 200, 3
+            size: 2641, 1947
+            do_rotation: False
+            do_scale: True
+            do_translation: True
+            auto_bring_to_front: False
+            Image:
+                source:'london-tube-map-11.gif'
+
+                allow_strech: True
+                keep_ratio: True
+                size: 1170,831
+        Button:
+
+            text:'Go back'
+            size:250, 50
+            size_hint:None, None
+            on_release: root.current = 'main'
